@@ -1,0 +1,315 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		618212A6A756B404B182ACBA /* R.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CC578F7AE13F597854538A /* R.swift */; };
+		D10A6A711D2F41E9005BD65F /* HUScrollViewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10A6A701D2F41E9005BD65F /* HUScrollViewCard.swift */; };
+		D19B7F2C1D2620C30028B3D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19B7F2B1D2620C30028B3D8 /* AppDelegate.swift */; };
+		D19B7F2E1D2620C30028B3D8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19B7F2D1D2620C30028B3D8 /* ViewController.swift */; };
+		D19B7F311D2620C30028B3D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D19B7F2F1D2620C30028B3D8 /* Main.storyboard */; };
+		D19B7F331D2620C30028B3D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D19B7F321D2620C30028B3D8 /* Assets.xcassets */; };
+		D19B7F361D2620C30028B3D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D19B7F341D2620C30028B3D8 /* LaunchScreen.storyboard */; };
+		D19B7F3E1D2621330028B3D8 /* HUCardScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19B7F3D1D2621330028B3D8 /* HUCardScrollView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		40CC578F7AE13F597854538A /* R.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.swift; sourceTree = "<group>"; };
+		D10A6A701D2F41E9005BD65F /* HUScrollViewCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUScrollViewCard.swift; sourceTree = "<group>"; };
+		D19B7F281D2620C20028B3D8 /* CardScrollView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardScrollView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D19B7F2B1D2620C30028B3D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D19B7F2D1D2620C30028B3D8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D19B7F301D2620C30028B3D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D19B7F321D2620C30028B3D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D19B7F351D2620C30028B3D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D19B7F371D2620C30028B3D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D19B7F3D1D2621330028B3D8 /* HUCardScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUCardScrollView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D19B7F251D2620C20028B3D8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D19B7F1F1D2620C20028B3D8 = {
+			isa = PBXGroup;
+			children = (
+				D19B7F2A1D2620C30028B3D8 /* CardScrollView */,
+				D19B7F291D2620C20028B3D8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D19B7F291D2620C20028B3D8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D19B7F281D2620C20028B3D8 /* CardScrollView.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D19B7F2A1D2620C30028B3D8 /* CardScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				D19B7F2B1D2620C30028B3D8 /* AppDelegate.swift */,
+				D19B7F2D1D2620C30028B3D8 /* ViewController.swift */,
+				D19B7F3D1D2621330028B3D8 /* HUCardScrollView.swift */,
+				D10A6A701D2F41E9005BD65F /* HUScrollViewCard.swift */,
+				D19B7F2F1D2620C30028B3D8 /* Main.storyboard */,
+				D19B7F321D2620C30028B3D8 /* Assets.xcassets */,
+				D19B7F341D2620C30028B3D8 /* LaunchScreen.storyboard */,
+				D19B7F371D2620C30028B3D8 /* Info.plist */,
+				40CC578F7AE13F597854538A /* R.swift */,
+			);
+			path = CardScrollView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D19B7F271D2620C20028B3D8 /* CardScrollView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D19B7F3A1D2620C30028B3D8 /* Build configuration list for PBXNativeTarget "CardScrollView" */;
+			buildPhases = (
+				D19B7F241D2620C20028B3D8 /* Sources */,
+				D19B7F251D2620C20028B3D8 /* Frameworks */,
+				D19B7F261D2620C20028B3D8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CardScrollView;
+			productName = CardScrollView;
+			productReference = D19B7F281D2620C20028B3D8 /* CardScrollView.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D19B7F201D2620C20028B3D8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = Hummer;
+				TargetAttributes = {
+					D19B7F271D2620C20028B3D8 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 22PE2868MA;
+					};
+				};
+			};
+			buildConfigurationList = D19B7F231D2620C20028B3D8 /* Build configuration list for PBXProject "CardScrollView" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D19B7F1F1D2620C20028B3D8;
+			productRefGroup = D19B7F291D2620C20028B3D8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D19B7F271D2620C20028B3D8 /* CardScrollView */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D19B7F261D2620C20028B3D8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D19B7F361D2620C30028B3D8 /* LaunchScreen.storyboard in Resources */,
+				D19B7F331D2620C30028B3D8 /* Assets.xcassets in Resources */,
+				D19B7F311D2620C30028B3D8 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D19B7F241D2620C20028B3D8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				618212A6A756B404B182ACBA /* R.swift in Sources */,
+				D19B7F3E1D2621330028B3D8 /* HUCardScrollView.swift in Sources */,
+				D19B7F2E1D2620C30028B3D8 /* ViewController.swift in Sources */,
+				D10A6A711D2F41E9005BD65F /* HUScrollViewCard.swift in Sources */,
+				D19B7F2C1D2620C30028B3D8 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D19B7F2F1D2620C30028B3D8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D19B7F301D2620C30028B3D8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D19B7F341D2620C30028B3D8 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D19B7F351D2620C30028B3D8 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D19B7F381D2620C30028B3D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D19B7F391D2620C30028B3D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D19B7F3B1D2620C30028B3D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = CardScrollView/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hummer.CardScrollView;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		D19B7F3C1D2620C30028B3D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = CardScrollView/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hummer.CardScrollView;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D19B7F231D2620C20028B3D8 /* Build configuration list for PBXProject "CardScrollView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D19B7F381D2620C30028B3D8 /* Debug */,
+				D19B7F391D2620C30028B3D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D19B7F3A1D2620C30028B3D8 /* Build configuration list for PBXNativeTarget "CardScrollView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D19B7F3B1D2620C30028B3D8 /* Debug */,
+				D19B7F3C1D2620C30028B3D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D19B7F201D2620C20028B3D8 /* Project object */;
+}
