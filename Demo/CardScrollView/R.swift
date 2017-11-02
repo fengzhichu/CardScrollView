@@ -31,12 +31,12 @@ extension NSObject {
         var green: CGFloat = 0.0
         var blue:  CGFloat = 0.0
         if argb.hasPrefix("#") {
-            let index   = argb.startIndex.advancedBy(1)
-            let hex     = argb.substringFromIndex(index)
-            let scanner = NSScanner(string: hex)
+            let nsargb   = (argb as NSString).substring(from: 1)
+            let hex     = nsargb as String
+            let scanner = Scanner(string: hex)
             var hexValue: CUnsignedLongLong = 0
-            if scanner.scanHexLongLong(&hexValue) {
-                switch (hex.characters.count) {
+            if scanner.scanHexInt64(&hexValue) {
+                switch (hex.count) {
                 case 3:
                     red   = CGFloat((hexValue & 0xF00) >> 8)       / 15.0
                     green = CGFloat((hexValue & 0x0F0) >> 4)       / 15.0
@@ -68,22 +68,22 @@ extension NSObject {
     }
 
     func image(r: R.image) -> UIImage? {
-        return UIImage(named: String(r))
+        return UIImage(named: String(describing: r))
     }
 
     func string(r: R.string) -> String {
-        return NSLocalizedString(String(r), tableName: nil, bundle: NSBundle.mainBundle(), value: "", comment: "")
+        return NSLocalizedString(String(describing: r), tableName: nil, bundle: Bundle.main, value: "", comment: "")
     }
 
     func getColor(r: R.color) -> UIColor {
-        return color(r)
+        return color(r: r)
     }
 
     func getImage(r: R.image) -> UIImage? {
-        return image(r)
+        return image(r: r)
     }
 
     func getString(r: R.string) -> String {
-        return string(r)
+        return string(r: r)
     }
 }

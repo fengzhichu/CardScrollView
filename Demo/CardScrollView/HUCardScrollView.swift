@@ -20,8 +20,8 @@ enum HUCardScrollDirection {
 @objc protocol HUCardScrollViewDataSource: class {
     func numberOfCardsInCardScrollView(cardScrollView: HUCardScrollView) -> Int
     func cardScrollView(cardScrollView: HUCardScrollView, cardAtIndex index: Int) -> HUScrollViewCard
-    optional func widthForscrollCardAtIndex(index: Int) -> CGFloat
-    optional func heightForscrollCardAtIndex(index: Int) -> CGFloat
+    @objc optional func widthForscrollCardAtIndex(index: Int) -> CGFloat
+    @objc optional func heightForscrollCardAtIndex(index: Int) -> CGFloat
 }
 
 protocol HUCardScrollViewDelegate: class {
@@ -38,7 +38,7 @@ class HUCardScrollView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegat
     var cardMargin: CGFloat = 10
     
     var visibleCards: [HUScrollViewCard] {
-        return _visibleCardsPool.sort { $0.0 < $1.0 }.map { $0.1 }
+        return _visibleCardsPool.sorted { $0.0 < $1.0 }.map { $0.1 }
     }
     var selectedIndex: Int {
         return _selectedIndex
@@ -101,8 +101,8 @@ class HUCardScrollView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegat
         setupUI()
     }
     
-    override func drawRect(rect: CGRect) {
-        super.drawRect(rect)
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
         
         setupUI()
         resetUI()
@@ -117,7 +117,7 @@ class HUCardScrollView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegat
         initLayoutInfo()
         displayNeededCards()
         
-        scrollCardToIndex(_lastMiddleIndexWhenOrientationChanged, animated: true)
+        scrollCardToIndex(index: _lastMiddleIndexWhenOrientationChanged, animated: true)
         _lastMiddleIndexWhenOrientationChanged = _middleCardIndex
     }
     
@@ -154,13 +154,13 @@ class HUCardScrollView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegat
     }
     
     private func setupConstraints() {
-        addConstraintsBetween(self, secondView: _scrollView)
-        addConstraintsBetween(_scrollView, secondView: _contentView)
+        addConstraintsBetween(firstView: self, secondView: _scrollView)
+        addConstraintsBetween(firstView: _scrollView, secondView: _contentView)
         
         _scrollView.constraints.forEach { (constraint) -> Void in
-            if (constraint.firstItem as! UIView == self._scrollView &&
-                constraint.secondItem as! UIView == self._contentView) {
-                if constraint.firstAttribute == .Width {
+            if ((constraint.firstItem as! UIView) == self._scrollView &&
+                (constraint.secondItem as! UIView) == self._contentView) {
+                if constraint.firstAttribute == .width {
                     self._cntViewWidthConstraint = constraint
                 }
             }
@@ -169,10 +169,10 @@ class HUCardScrollView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegat
     
     private func addConstraintsBetween(firstView: UIView, secondView: UIView) {
         secondView.translatesAutoresizingMaskIntoConstraints = false
-        let top = NSLayoutConstraint(item: secondView, attribute: .Top, relatedBy: .Equal, toItem: firstView, attribute: .Top, multiplier: 1.0, constant: 0)
-        let bottom = NSLayoutConstraint(item: secondView, attribute: .Bottom, relatedBy: .Equal, toItem: firstView, attribute: .Bottom, multiplier: 1.0, constant: 0)
-        let width = NSLayoutConstraint(item: secondView, attribute: .Width, relatedBy: .Equal, toItem: firstView, attribute: .Width, multiplier: 1.0, constant: 0)
-        let height = NSLayoutConstraint(item: secondView, attribute: .Height, relatedBy: .Equal, toItem: firstView, attribute: .Height, multiplier: 1.0, constant: 0)
+        let top = NSLayoutConstraint(item: secondView, attribute: .top, relatedBy: .equal, toItem: firstView, attribute: .top, multiplier: 1.0, constant: 0)
+        let bottom = NSLayoutConstraint(item: secondView, attribute: .bottom, relatedBy: .equal, toItem: firstView, attribute: .bottom, multiplier: 1.0, constant: 0)
+        let width = NSLayoutConstraint(item: secondView, attribute: .width, relatedBy: .equal, toItem: firstView, attribute: .width, multiplier: 1.0, constant: 0)
+        let height = NSLayoutConstraint(item: secondView, attribute: .height, relatedBy: .equal, toItem: firstView, attribute: .height, multiplier: 1.0, constant: 0)
         firstView.addConstraints([top, bottom, width, height])
     }
     
@@ -200,35 +200,37 @@ class HUCardScrollView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegat
             return
         }
         for index in start ... end {
-            let card = dataSource?.cardScrollView(self, cardAtIndex: index)
+            let card = dataSource?.cardScrollView(cardScrollView: self, cardAtIndex: index)
             assert(card != nil, "Card can't be nil.")
-            enqueueReusedCard(card!)
+            enqueueReusedCard(card: card!)
         }
     }
     
     private func displayNeededCards() {
         let (start, end) = calWillDisplayCardsRange()
-        _visibleCardsPool.forEach { (_, card) -> Void in
-            self.enqueueReusedCard(card)
+        _visibleCardsPool.forEach { (arg) -> Void in
+            
+            let (_, card) = arg
+            self.enqueueReusedCard(card: card)
         }
         _visibleCardsPool.removeAll()
         _contentView.subviews.forEach { $0.removeFromSuperview() }
-        addWillDisplayCardsFrom(start, to: end)
+        addWillDisplayCardsFrom(startIndex: start, to: end)
         if let card = _visibleCardsPool[0] {
-            self.delegate?.cardScrollView(self, updateVisiblsCard: card, withProgress: 1)
+            self.delegate?.cardScrollView(cardScrollView: self, updateVisiblsCard: card, withProgress: 1)
         }
     }
     
     ///  Record the width and height of card. Calcutlate the offset of every card, and contentSize of scroll view.
     private func initLayoutInfo() {
-        _numberOfCards = dataSource?.numberOfCardsInCardScrollView(self) ?? 0
+        _numberOfCards = dataSource?.numberOfCardsInCardScrollView(cardScrollView: self) ?? 0
         guard _numberOfCards > 0 else {
             return
         }
         var offset = CGFloat(0.0)
         for index in 0..<_numberOfCards {
-            let cardWidth = dataSource?.widthForscrollCardAtIndex?(index) ?? kDefaultCardWidth
-            let cardHeight = dataSource?.heightForscrollCardAtIndex?(index) ?? kDefaultCardHeight
+            let cardWidth = dataSource?.widthForscrollCardAtIndex?(index: index) ?? kDefaultCardWidth
+            let cardHeight = dataSource?.heightForscrollCardAtIndex?(index: index) ?? kDefaultCardHeight
             _cardWidths.append(cardWidth)
             _cardHeights.append(cardHeight)
             offset += (cardWidth + cardMargin)
@@ -245,10 +247,10 @@ class HUCardScrollView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegat
     ///  Add cards to screen.
     private func addWillDisplayCardsFrom(startIndex: Int, to endIndex: Int) {
         for index in startIndex ... endIndex {
-            let card = dataSource?.cardScrollView(self, cardAtIndex: index)
+            let card = dataSource?.cardScrollView(cardScrollView: self, cardAtIndex: index)
             assert(card != nil, "Card can't be nil.")
-            card!.frame = getRectForCardAtIndex(index)
-            addCard(card!, atIndex: index)
+            card!.frame = getRectForCardAtIndex(index: index)
+            addCard(card: card!, atIndex: index)
 //            setCardConstraints(card!, frame: cardFrame)
             card!.selected = (_selectedIndex == index) ? true : false
         }
@@ -257,10 +259,10 @@ class HUCardScrollView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegat
     private func setCardConstraints(card: UIView, frame: CGRect) {
 
         card.translatesAutoresizingMaskIntoConstraints = false
-        let leading = NSLayoutConstraint(item: card, attribute: .Leading, relatedBy: .Equal, toItem: _contentView, attribute: .Leading, multiplier: 1.0, constant: frame.origin.x)
-        let centerY = NSLayoutConstraint(item: card, attribute: .CenterY, relatedBy: .Equal, toItem: _contentView, attribute: .CenterY, multiplier: 1.0, constant: 0)
-        let width = NSLayoutConstraint(item: card, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: frame.size.width)
-        let height = NSLayoutConstraint(item: card, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: frame.size.height)
+        let leading = NSLayoutConstraint(item: card, attribute: .leading, relatedBy: .equal, toItem: _contentView, attribute: .leading, multiplier: 1.0, constant: frame.origin.x)
+        let centerY = NSLayoutConstraint(item: card, attribute: .centerY, relatedBy: .equal, toItem: _contentView, attribute: .centerY, multiplier: 1.0, constant: 0)
+        let width = NSLayoutConstraint(item: card, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: frame.size.width)
+        let height = NSLayoutConstraint(item: card, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: frame.size.height)
         
         _contentView.addConstraints([leading, centerY, width, height])
     }
@@ -297,7 +299,7 @@ class HUCardScrollView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegat
     ///  Calculate the frame of card.
     private func getRectForCardAtIndex(index: Int) -> CGRect {
         guard (index >= 0 || index < _numberOfCards) && _cardWidths.count > 0 else {
-            return CGRectZero
+            return CGRect.zero
         }
         let width = _cardWidths[index]
         let height = _cardHeights[index]
@@ -308,7 +310,7 @@ class HUCardScrollView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegat
     
     private func addCard(card: HUScrollViewCard, atIndex index: Int) {
         guard _visibleCardsPool[index] == nil else {
-            enqueueReusedCard(card)
+            enqueueReusedCard(card: card)
             return
         }
         card.index = index
@@ -320,8 +322,8 @@ class HUCardScrollView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegat
     private func cleanUpUnusedCardsFrom(start: Int,to end: Int) {
         for (index, card) in _visibleCardsPool {
             if index < start || index > end {
-                _visibleCardsPool.removeValueForKey(index)
-                enqueueReusedCard(card)
+                _visibleCardsPool.removeValue(forKey: index)
+                enqueueReusedCard(card: card)
             }
         }
     }
@@ -337,7 +339,7 @@ class HUCardScrollView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegat
         let rightDelt = willDisplayCardsRange.endIndex - _lastDisplayCardsRange.endIndex
         _lastDisplayCardsRange = willDisplayCardsRange
         
-        cleanUpUnusedCardsFrom(willDisplayCardsRange.startIndex, to: willDisplayCardsRange.endIndex)
+        cleanUpUnusedCardsFrom(start: willDisplayCardsRange.startIndex, to: willDisplayCardsRange.endIndex)
         
         switch (leftDelt, rightDelt) {
         case (0, -_numberOfCards ... -1):
@@ -352,10 +354,10 @@ class HUCardScrollView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegat
         
         if leftDelt > 0 || rightDelt > 0 {
             _scrollDirection = .Left
-            addWillDisplayCardsFrom(willDisplayCardsRange.endIndex, to: willDisplayCardsRange.endIndex)
+            addWillDisplayCardsFrom(startIndex: willDisplayCardsRange.endIndex, to: willDisplayCardsRange.endIndex)
         } else {
             _scrollDirection = .Right
-            addWillDisplayCardsFrom(willDisplayCardsRange.startIndex, to: willDisplayCardsRange.startIndex)
+            addWillDisplayCardsFrom(startIndex: willDisplayCardsRange.startIndex, to: willDisplayCardsRange.startIndex)
         }
     }
     
@@ -374,7 +376,7 @@ class HUCardScrollView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegat
         }
         // Clear up animation state of card
         card.layer.transform = CATransform3DIdentity
-        card.transform = CGAffineTransformIdentity
+        card.transform = CGAffineTransform.identity
         card.removeFromSuperview()
     }
     
@@ -404,17 +406,17 @@ class HUCardScrollView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegat
 
     // MARK: - ScrollView Delegate
     
-    @objc internal func scrollViewDidScroll(scrollView: UIScrollView) {
+    @objc internal func scrollViewDidScroll(_ scrollView: UIScrollView) {
         checkupChangeOfdisplayRange()
-        calculateMiddleCardIndexFromOffset(scrollView.contentOffset.x)
+        let _ = calculateMiddleCardIndexFromOffset(offset: scrollView.contentOffset.x)
         if let middleCard = _visibleCardsPool[_middleCardIndex] {
             let progress = calculateProgressForUpdatingCard()
-            self.delegate?.cardScrollView(self, updateVisiblsCard: middleCard, withProgress: progress)
+            self.delegate?.cardScrollView(cardScrollView: self, updateVisiblsCard: middleCard, withProgress: progress)
         }
     }
     
-    @objc internal func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let stopIndex = calculateMiddleCardIndexFromOffset(targetContentOffset.memory.x)
-        targetContentOffset.memory.x = _cardPositionOffsets[stopIndex] - _cardWidths[stopIndex] - cardMargin - (frame.width - _cardWidths[0]) * 0.5
+    @objc internal func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let stopIndex = calculateMiddleCardIndexFromOffset(offset: targetContentOffset.pointee.x)
+        targetContentOffset.pointee.x = _cardPositionOffsets[stopIndex] - _cardWidths[stopIndex] - cardMargin - (frame.width - _cardWidths[0]) * 0.5
     }
 }

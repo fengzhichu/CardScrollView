@@ -13,24 +13,24 @@ class ViewController: UIViewController, HUCardScrollViewDelegate, HUCardScrollVi
 //    @IBOutlet weak var cardScrollView: HUCardScrollView!
     var cardScrollView: HUCardScrollView = {
         let cardScrollView = HUCardScrollView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: UIScreen.height))
-        cardScrollView.backgroundColor = UIColor.whiteColor()
+        cardScrollView.backgroundColor = UIColor.white
         return cardScrollView
     }()
     
     var button:UIButton = {
-        let btn = UIButton(type: .Custom)
-        btn.backgroundColor = UIColor.blackColor()
+        let btn = UIButton(type: .custom)
+        btn.backgroundColor = UIColor.black
         btn.layer.cornerRadius = 5.0
         btn.layer.masksToBounds = true
-        btn.setTitle("Reload", forState: .Normal)
-        btn.setTitleColor(UIColor.yellowColor(), forState: .Normal)
+        btn.setTitle("Reload", for: .normal)
+        btn.setTitleColor(UIColor.yellow, for: .normal)
         return btn
     }()
     
     var cardsInfo = [String]()
-    var numberOfCard = 100
-    private let _cardWidth: CGFloat = 180
-    private let _cardHeight: CGFloat = 260 //UIScreen.mainScreen().bounds.height
+    var numberOfCard = 6
+    private let _cardWidth: CGFloat = 245
+    private let _cardHeight: CGFloat = 130 //UIScreen.mainScreen().bounds.height
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,26 +38,26 @@ class ViewController: UIViewController, HUCardScrollViewDelegate, HUCardScrollVi
         self.view.addSubview(cardScrollView)
         cardScrollView.dataSource = self
         cardScrollView.delegate = self
-        cardScrollView.cardMargin = 60
+        cardScrollView.cardMargin = 40
         
         let line = UIView()
-        line.backgroundColor = UIColor.lightGrayColor()
+        line.backgroundColor = UIColor.lightGray
         self.view.addSubview(line)
         
         line.translatesAutoresizingMaskIntoConstraints = false
-        let top = NSLayoutConstraint(item: line, attribute: .Top, relatedBy: .Equal, toItem: self.view, attribute: .Top, multiplier: 1.0, constant: 0);
-        let bottom = NSLayoutConstraint(item: line, attribute: .Bottom, relatedBy: .Equal, toItem: self.view, attribute: .Bottom, multiplier: 1.0, constant: 0)
-        let centerX = NSLayoutConstraint(item: line, attribute: .CenterX, relatedBy: .Equal, toItem: self.view, attribute: .CenterX, multiplier: 1.0, constant: 0)
-        let width = NSLayoutConstraint(item: line, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 1)
+        let top = NSLayoutConstraint(item: line, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1.0, constant: 0);
+        let bottom = NSLayoutConstraint(item: line, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: 0)
+        let centerX = NSLayoutConstraint(item: line, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0)
+        let width = NSLayoutConstraint(item: line, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 1)
         self.view.addConstraints([top, bottom, centerX, width])
         
-        button.addTarget(self, action: #selector(ViewController.reload), forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(ViewController.reload), for: .touchUpInside)
         self.view.addSubview(button)
         button.translatesAutoresizingMaskIntoConstraints = false
-        let btnWidth = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 100)
-        let btnHeight = NSLayoutConstraint(item: button, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 40)
-        let btnCenterX = NSLayoutConstraint(item: button, attribute: .CenterX, relatedBy: .Equal, toItem: self.view, attribute: .CenterX, multiplier: 1.0, constant: 0)
-        let btnBottom = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: self.view, attribute: .Bottom, multiplier: 1.0, constant: -20)
+        let btnWidth = NSLayoutConstraint(item: button, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 100)
+        let btnHeight = NSLayoutConstraint(item: button, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 40)
+        let btnCenterX = NSLayoutConstraint(item: button, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0)
+        let btnBottom = NSLayoutConstraint(item: button, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: -20)
         self.view.addConstraints([btnWidth, btnHeight, btnCenterX, btnBottom])
         
         for i in 0 ..< numberOfCard {
@@ -67,8 +67,8 @@ class ViewController: UIViewController, HUCardScrollViewDelegate, HUCardScrollVi
         cardScrollView.reloadData()
     }
     
-    func reload() {
-        cardScrollView.scrollCardToIndex(0, animated: true)
+    @objc func reload() {
+        cardScrollView.scrollCardToIndex(index: 0, animated: true)
         cardScrollView.reloadData()
     }
 
@@ -94,18 +94,18 @@ class ViewController: UIViewController, HUCardScrollViewDelegate, HUCardScrollVi
     }
     
     func cardScrollView(cardScrollView: HUCardScrollView, cardAtIndex index: Int) -> HUScrollViewCard {
-        var card = cardScrollView.dequeueReusableCardWithIdentifier("card")
+        var card = cardScrollView.dequeueReusableCardWithIdentifier(identifier: "card")
         if card == nil {
             card = HUScrollViewCard(frame: CGRect(x: 0, y: 0, width: _cardWidth, height: _cardHeight))
+            card!.backgroundColor = randomColor()
             card!.identifier = "card"
             let label = UILabel(frame: card!.frame)
             label.text = cardsInfo[index]
-            label.textAlignment = .Center
-            label.textColor = UIColor.whiteColor()
-            label.font = UIFont.boldSystemFontOfSize(15)
+            label.textAlignment = .center
+            label.textColor = UIColor.white
+            label.font = UIFont.boldSystemFont(ofSize: 15)
             card!.addSubview(label)
         }
-        card!.backgroundColor = randomColor()
         card!.layer.cornerRadius = 5.0
         card!.layer.masksToBounds = true
         (card?.subviews.first as! UILabel).text = cardsInfo[index]
@@ -120,9 +120,9 @@ class ViewController: UIViewController, HUCardScrollViewDelegate, HUCardScrollVi
 
 extension UIScreen {
     class var width: CGFloat {
-        return UIScreen.mainScreen().bounds.width
+        return UIScreen.main.bounds.width
     }
     class var height: CGFloat {
-        return UIScreen.mainScreen().bounds.height
+        return UIScreen.main.bounds.height
     }
 }

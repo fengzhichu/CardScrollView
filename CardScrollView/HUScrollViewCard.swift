@@ -16,6 +16,6 @@ class HUScrollViewCard: UIView {
     var selected = false
         
     override var description: String {
-        return "<HUScrollViewCard: \(unsafeAddressOf(self)): index: \(index)>\n"
+        return "<HUScrollViewCard: \(Unmanaged.passUnretained(self).toOpaque()): index: \(index)>\n"
     }
 }
